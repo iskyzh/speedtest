@@ -53,6 +53,28 @@
           pointHitRadius: 10,
           data: [],
           spanGaps: false,
+        },
+        {
+          label: "Average Speed",
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgba(54,162,235,0.4)",
+          borderColor: "rgba(54,162,235,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: [],
+          spanGaps: false,
         }
       ]
     };
@@ -69,13 +91,15 @@
         Math.round((totalRecved - lstRecved) / (__now - lstTime) * 1000 / 1024 / 1024 * 8 * 100) / 100 + " Mbps"
       );
       speedChart.data.datasets[0].data.push((totalRecved - lstRecved) / (__now - lstTime) * 1000 / 1024);
+      speedChart.data.datasets[1].data.push(totalRecved / (__now - startTime) * 1000 / 1024);
       speedChart.data.labels.push(((__now - startTime) / 1000).toString());
       speedChart.data.datasets[0].data = _.takeRight(speedChart.data.datasets[0].data, 50);
+      speedChart.data.datasets[1].data = _.takeRight(speedChart.data.datasets[1].data, 50);
       speedChart.data.labels = _.takeRight(speedChart.data.labels, 50);
       lstTime = __now;
       lstRecved = totalRecved;
 
-      speedChart.update();
+      speedChart.update(0);
     }, 200);
   });
 })();
