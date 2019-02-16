@@ -1,2 +1,2 @@
 # speedtest
-test http download speet
+test http download speed
